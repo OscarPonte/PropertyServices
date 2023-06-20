@@ -15,6 +15,11 @@ public class CreateTodoItemHandler : IRequestHandler<CreateTodoItemRequest, Guid
 
     public async Task<Guid> Handle(CreateTodoItemRequest request, CancellationToken cancellationToken)
     {
+        if (string.IsNullOrEmpty(request.Text))
+        {
+            throw new ArgumentException("Cannot create an empty Todo item. Please provide a valid item");
+        }
+
         var item = new TodoItem
         {
             Created = DateTimeOffset.UtcNow,
