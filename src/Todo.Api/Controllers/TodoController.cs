@@ -15,8 +15,8 @@ public class TodoController : ControllerBase
     }
 
     [HttpGet("list")]
-    public async Task<IActionResult> List() =>
-        Ok(await _sender.Send(new ListTodoItemsRequest()));
+    public async Task<IActionResult> List(bool hideCompleted = false) =>
+        Ok(await _sender.Send(new ListTodoItemsRequest(hideCompleted)));
     
     [HttpPost("create")]
     public async Task<IActionResult> Get([FromBody] CreateTodoItemRequest request) =>
