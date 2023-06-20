@@ -2,7 +2,7 @@
 
 namespace Todo.Api.Handlers;
 
-public record ListTodoItemsRequest : IRequest<IEnumerable<TodoItem>>;
+public record ListTodoItemsRequest(bool HideCompleted) : IRequest<IEnumerable<TodoItem>>;
 
 public class ListTodoItemsHandler : IRequestHandler<ListTodoItemsRequest, IEnumerable<TodoItem>>
 {
@@ -15,6 +15,13 @@ public class ListTodoItemsHandler : IRequestHandler<ListTodoItemsRequest, IEnume
 
     public async Task<IEnumerable<TodoItem>> Handle(ListTodoItemsRequest request, CancellationToken cancellationToken)
     {
-        return await _todoRepository.List();
+        var todoItems = await _todoRepository.List();
+
+        if (request.HideCompleted)
+        {
+            todoItems = todoItems.Where(x => !x.Completed.HasValue);
+        }
+
+        return todoItems;
     }
 }
