@@ -14,7 +14,7 @@ public class DbInitializer
             .RuleFor(t => t.Id, f => Guid.NewGuid())
             .RuleFor(t => t.Completed, f => f.Random.Bool() ? f.Date.PastOffset() : null)
             .RuleFor(t => t.Created, (f, t) => f.Date.PastOffset(refDate: t.Completed))
-            .RuleFor(t => t.Text, f => f.Lorem.Sentence());
+            .RuleFor(t => t.Text, f => f.Lorem.Sentence().ToUpper());
 
         var items = itemFaker.Generate(5);
 
