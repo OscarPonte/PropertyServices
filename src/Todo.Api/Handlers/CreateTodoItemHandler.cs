@@ -17,7 +17,7 @@ public class CreateTodoItemHandler : IRequestHandler<CreateTodoItemRequest, Guid
     {
         var item = new TodoItem
         {
-            Created = DateTime.Now,
+            Created = DateTimeOffset.UtcNow,
             Id = Guid.NewGuid(),
             Text = request.Text
         };
