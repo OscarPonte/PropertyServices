@@ -22,6 +22,6 @@ public class ListTodoItemsHandler : IRequestHandler<ListTodoItemsRequest, IEnume
             todoItems = todoItems.Where(x => !x.Completed.HasValue);
         }
 
-        return todoItems;
+        return todoItems.OrderByDescending(x => x.Created);
     }
 }
