@@ -4,8 +4,17 @@ namespace Todo.Data;
 
 public interface ITodoRepository
 {
+    /// <summary>
+    /// Retrieves a list of todo items.
+    /// </summary>
+    /// <returns>A task that represents the asynchronous operation and contains the list of todo items.</returns>
     Task<IEnumerable<TodoItem>> List();
-    
+
+    /// <summary>
+    /// Creates a new todo item.
+    /// </summary>
+    /// <param name="newItem">The todo item to create.</param>
+    /// <returns>A task that represents the asynchronous operation and contains the ID of the newly created todo item.</returns>
     Task<Guid> Create(TodoItem newItem);
 
     /// <summary>
