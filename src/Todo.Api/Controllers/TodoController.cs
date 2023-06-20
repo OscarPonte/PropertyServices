@@ -19,7 +19,7 @@ public class TodoController : ControllerBase
         Ok(await _sender.Send(new ListTodoItemsRequest(hideCompleted)));
     
     [HttpPost("create")]
-    public async Task<IActionResult> Get([FromBody] CreateTodoItemRequest request) =>
+    public async Task<IActionResult> Create([FromBody] CreateTodoItemRequest request) =>
         Ok(await _sender.Send(request));
 
     [HttpPost("Complete")]

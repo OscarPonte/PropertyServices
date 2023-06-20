@@ -73,7 +73,7 @@ namespace Todo.Api.Tests.Controllers
         }
 
         [Test]
-        public async Task Get_ValidRequest_ReturnsOkResult()
+        public async Task Create_ValidRequest_ReturnsOkResult()
         {
             // Arrange
             var expectedRequest = new CreateTodoItemRequest("New Task");
@@ -81,7 +81,7 @@ namespace Todo.Api.Tests.Controllers
             _senderMock.Setup(x => x.Send(expectedRequest, CancellationToken.None)).ReturnsAsync(expectedResponse);
 
             // Act
-            var result = await _todoController.Get(expectedRequest);
+            var result = await _todoController.Create(expectedRequest);
 
             // Assert
             var okResult = result as OkObjectResult;
