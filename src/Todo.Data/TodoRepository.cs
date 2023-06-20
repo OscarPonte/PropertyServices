@@ -25,4 +25,19 @@ public class TodoRepository: ITodoRepository
         await _context.SaveChangesAsync();
         return newItem.Id;
     }
+
+    public async Task<bool> Update(TodoItem updatedItem)
+    {
+        var existingItem = await _context.TodoItems.FindAsync(updatedItem.Id);
+
+        if (existingItem == null)
+        {
+            return false; // Item not found
+        }
+
+        existingItem.Completed = updatedItem.Completed; 
+
+        await _context.SaveChangesAsync();
+        return true;
+    }
 }

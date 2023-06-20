@@ -21,4 +21,8 @@ public class TodoController : ControllerBase
     [HttpPost("create")]
     public async Task<IActionResult> Get([FromBody] CreateTodoItemRequest request) =>
         Ok(await _sender.Send(request));
+
+    [HttpPost("Complete")]
+    public async Task<IActionResult> Complete([FromBody] CompleteTodoItemRequest request) =>
+        await _sender.Send(request) ? Ok() : BadRequest();
 }
